@@ -15,4 +15,5 @@ export const hospitalNavData = [
         icon: 'fa-solid fa-clock-rotate-left',
         href: '/hospital/claim-history',
     },
+    
 ];

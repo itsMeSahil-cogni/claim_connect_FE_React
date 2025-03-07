@@ -57,16 +57,18 @@ const SignIn = () => {
                 toast.error('Please select a role.');
                 return;
         }
-        console.log(payload);
+        // console.log(payload);
         try {
             const response = await axios.post(apiUrl, payload);
-            if (response.data != null) {
+            console.log(response);
+            if (response.data.data != null) {
+                
                 toast.success("JWT Token Received");
                 // Handle successful sign-in (e.g., store token, navigate to dashboard)
                 // Example: Navigate to role-specific dashboard
                 setTimeout(() => {
-                    const token = response.data;
-                    console.log(token);
+                    const token = response.data.data;
+                    // console.log(token);
                     localStorage.setItem(role, token);
                     if (role === 'Hospital') {
                         navigate('/hospital/dashboard');
@@ -80,8 +82,10 @@ const SignIn = () => {
                 toast.error(response.data.msg || 'Sign-in failed.');
             }
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.msg) {
-                toast.error(error.response.data.msg);
+            console.log(error);
+            
+            if (error.response && error.response.data) {
+                toast.error(error.response.data);
             } else {
                 toast.error('An error occurred during sign-in.');
             }
